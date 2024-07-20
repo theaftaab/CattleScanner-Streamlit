@@ -143,6 +143,14 @@ class CattleWeight:
 
 
 class CattleRumination:
+    """
+    Initialize the object with the provided current working directory and output directory.
+
+    Parameters:
+        cwd (str): The current working directory path.
+        output_dir (str): The directory to store the inference results. Default is "inference_results".
+    """
+
     def __init__(self, cwd, output_dir="inference_results"):
         self.rumination_model = YOLO(cwd + '/rumination.pt')
         self.output_dir = output_dir
