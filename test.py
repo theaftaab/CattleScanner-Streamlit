@@ -1,20 +1,20 @@
-# from CattleScanner import predict
-# side_img = "/Users/aftaabhussain/Work/Data Accumulator and prediction/Images/Side/127_b4-1_s_131_M.jpg"
-# rear_img = "/Users/aftaabhussain/Work/Data Accumulator and prediction/Images/Rear/127_b4-1_r_131_M.jpg"
-#
-# weight = predict(side_img, rear_img)
-# print(f"The weight is {weight} kg")
-
-# from CattleScanner import predict
 from CattleScanner.Cattle_inference import CattleWeight
+from CattleScanner.Cattle_inference import CattleRumination
 import CattleScanner
 import os
 
-
 path = os.path.dirname(CattleScanner.__file__)
-model = CattleWeight(cwd = path)
+weight_model = CattleWeight(cwd=path)
 side_img = "/Users/aftaabhussain/Work/Data Accumulator and prediction/Images/Side/127_b4-1_s_131_M.jpg"
 rear_img = "/Users/aftaabhussain/Work/Data Accumulator and prediction/Images/Rear/127_b4-1_r_131_M.jpg"
 
-weight = model.predict(side_img, rear_img)
+weight = weight_model.predict(side_img, rear_img)
 print(f"The weight is {weight} kg")
+input_video_path1 = "samples/rumination.mp4"
+input_video_path2 = "samples/rumination2.mp4"
+
+output_dir = "outputs"
+
+rumination_model = CattleRumination(cwd=path)
+rumination = rumination_model.run_video_inference(input_video_path2, output_dir)
+print(f'Rumination is {rumination} per minute')
