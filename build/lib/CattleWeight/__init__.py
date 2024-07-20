@@ -1,10 +1,10 @@
-# from CattleWeight.Cattle_inference import CattleInference
+# from CattleScanner.Cattle_inference import CattleInference
 # import pandas as pd
 # import joblib
 #
 #
 # def predict(side_img, rear_img):
-#     path = os.path.dirname(CattleWeight.__file__)
+#     path = os.path.dirname(CattleScanner.__file__)
 #     cattle_inference = CattleInference(path)
 #
 #     kpt = cattle_inference.infer_keypoints(side_img, rear_img)

@@ -1,4 +1,4 @@
-from CattleWeight.Cattle_inference import CattleInference
+from CattleScanner.Cattle_inference import CattleWeight
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.linear_model import LinearRegression
@@ -6,11 +6,11 @@ from sklearn.metrics import r2_score, mean_squared_error
 
 
 def predict(side_img, rear_img):
-    cattle_inference = CattleInference(
-        side_keypoint_path="CattleWeight/side_keypoint_model.pt",
-        rear_keypoint_path="CattleWeight/rear_keypoint_model.pt",
-        side_segmentation_path="CattleWeight/YOLO Models/side_segmentation_model/last.pt",
-        rear_segmentation_path="CattleWeight/rear_segmentation_model.pt",
+    cattle_inference = CattleWeight(
+        side_keypoint_path="CattleScanner/side_keypoint_model.pt",
+        rear_keypoint_path="CattleScanner/rear_keypoint_model.pt",
+        side_segmentation_path="CattleScanner/YOLO Models/side_segmentation_model/last.pt",
+        rear_segmentation_path="CattleScanner/rear_segmentation_model.pt",
         output_dir="inference_results")
 
     kpt = cattle_inference.infer_keypoints(side_img, rear_img)
@@ -24,7 +24,7 @@ def predict(side_img, rear_img):
     print(f'Args: {args}')
 
     # Load your data into a pandas DataFrame
-    data = pd.read_csv("CattleWeight/train_data.csv")  # Replace with your data loading method
+    data = pd.read_csv("CattleScanner/train_data.csv")  # Replace with your data loading method
 
     # Define the features (independent variables) and target (dependent variable)
     features = ["side_length_shoulderbone", "side_f_girth", "side_r_girth", "rear_width", "cow_pixels",

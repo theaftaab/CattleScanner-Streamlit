@@ -1,0 +1,15 @@
+setup.py
+CattleScanner/Cattle_inference.py
+CattleScanner/__init__.py
+CattleScanner/linear.pkl
+CattleScanner/rear_keypoint_model.pt
+CattleScanner/rear_segmentation_model.pt
+CattleScanner/requirements.txt
+CattleScanner/rumination.pt
+CattleScanner/side_keypoint_model.pt
+CattleScanner/side_segmentation_model.pt
+CattleScanner.egg-info/PKG-INFO
+CattleScanner.egg-info/SOURCES.txt
+CattleScanner.egg-info/dependency_links.txt
+CattleScanner.egg-info/requires.txt
+CattleScanner.egg-info/top_level.txt
