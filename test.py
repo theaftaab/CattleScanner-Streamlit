@@ -23,3 +23,6 @@ output_dir = "outputs"
 rumination_model = CattleRumination(cwd=path)
 rumination = rumination_model.run_video_inference(input_video_path2, output_dir)
 print(f'Rumination is {rumination} per minute')
+
+
+#testing docker
