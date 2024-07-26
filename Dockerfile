@@ -19,8 +19,8 @@ COPY CattleScanner /app/CattleScanner
 # Create directories for input and output
 RUN mkdir -p /app/inputs /app/outputs
 
-# Expose the port the app runs on
-EXPOSE 8000
+## Expose the port the app runs on
+#EXPOSE 8000
 
 # Set environment variables to indicate production mode
 ENV ENV=production

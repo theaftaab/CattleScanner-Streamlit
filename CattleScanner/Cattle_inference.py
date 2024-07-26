@@ -55,7 +55,7 @@ class CattleWeight:
                                           filename=f"{self.output_dir}/rear_keypoint.jpg")
         return self.side_keys, self.rear_keys
 
-    def infer_image(self, image_path, model, filename="result.jpg"):
+    def infer_image(self, image, model, filename="result.jpg"):
         """
         Performs inference on a single image using the specified model and saves the result.
 
@@ -64,7 +64,7 @@ class CattleWeight:
             model (YOLO): The YOLO model to use for inference.
             filename (str, optional): Filename to save the inference result. Defaults to "result.jpg".
         """
-        image = cv2.imread(image_path)
+        # image = cv2.imread(image_path)
         results = model(image)
         for result in results:
             keypoints = result.keypoints  # Keypoints object for pose outputs
@@ -94,7 +94,7 @@ class CattleWeight:
         self.rear_width = self.distance(kpt2[2], kpt2[3])
         return [self.side_length_shoulderbone, self.side_f_girth, self.side_r_girth, self.rear_width]
 
-    def return_pixels(self, image_path, model):
+    def return_pixels(self, image, model):
         """
         Parameters:
             self: the instance of the class
@@ -103,7 +103,7 @@ class CattleWeight:
         Returns:
             area_list: a list of areas of objects detected in the image
         """
-        results = model.predict(source=image_path, imgsz=640, conf=0.9)
+        results = model.predict(source=image, imgsz=640, conf=0.9)
         area_list = []
         if results[0].masks is not None:
             masks = results[0].masks.data.cpu().numpy()  # Retrieve masks as numpy arrays
