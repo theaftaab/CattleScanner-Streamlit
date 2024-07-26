@@ -8,37 +8,46 @@ import CattleScanner
 from CattleScanner.Cattle_inference import CattleRumination
 from CattleScanner.Cattle_inference import CattleWeight
 
+
+path = os.path.dirname(CattleScanner.__file__)
+
+weight_model = CattleWeight(cwd=path)
+
 # model_prediction = ModelPrediction()
 
 app = Flask(__name__)
 
 current_version = "v1"
 
-path = os.path.dirname(CattleScanner.__file__)
-
 @app.route('/{}/'.format(current_version), methods=['GET'])
 def home():
-    return "Serviceup and running!!!"
+    return "Service up and running!!!"
 
 
 @app.route('/{}/image_classification'.format(current_version), methods=['POST'])
 def image_classification():
     data = request.json
-    file = request.files['image']
+    rare_file = request.files['rare']
+    rare_side = request.files['side']
+    
+    if rare_file.filename == '' or rare_file.filename == '':
+        return jsonify({"error": "Both images must have a filename"}), 400
 
-    img = Image.open(file.stream)
+    # img1 = cv2.imdecode(np.frombuffer(file1.read(), np.uint8), cv2.IMREAD_COLOR)
+    # img2 = cv2.imdecode(np.frombuffer(file2.read(), np.uint8), cv2.IMREAD_COLOR)
 
-    data = file.stream.read()
-    # data = base64.encodebytes(data)
-    data = base64.b64encode(data).decode()
+    # img = Image.open(file.stream)
+
+    # data = file.stream.read()
+    # # data = base64.encodebytes(data)
+    # data = base64.b64encode(data).decode()
+    
     if len(data) == 0:
         return jsonify([])
 
-    weight_model = CattleWeight(cwd=path)
-    weight = weight_model.predict(side_img, rear_img)
+    weight = weight_model.predict(rare_side, rare_file)
 
-    inf_data = model_prediction.predict(data)
-    return jsonify(inf_data)
+    return jsonify({"weight": weight})
 
 
 if __name__ == '__main__':
