@@ -19,4 +19,4 @@ RUN chmod +x run.sh
 EXPOSE 8000
 
 # Command to run the Python script
-CMD ["/root/CattleScanner/run.sh"]
+CMD ["/app/run.sh"]

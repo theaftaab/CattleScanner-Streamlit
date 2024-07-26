@@ -11,4 +11,4 @@ tqdm==4.66.4
 ultralytics==8.2.38
 ultralytics-thop==2.0.0
 flask==2.3.2
-gunicorn==22.9.0
+gunicorn==22.0.0
