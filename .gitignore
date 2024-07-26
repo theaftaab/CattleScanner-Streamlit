@@ -1,5 +1,7 @@
 /CattleScanner.egg-info/
 .idea/
 /CattleWeight.egg-info/
+/CattleScanner/__pycache__
 /build/
 /dist/
+__pycache__
