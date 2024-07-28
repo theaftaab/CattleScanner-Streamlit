@@ -62,8 +62,15 @@ def predict_breed(side_img_path):
     return class_name
 
 
-def predict_horn_status(side_img_path, rear_img_path):
-    return "Horn-Present"
+def predict_horn_status(side_img_path):
+    horn_model = YOLO("CattleScanner/horn.pt")
+
+    results = horn_model(side_img_path)
+    class_name = None
+    for box in results[0].boxes:
+        class_id = int(box.cls)  # Assuming 'cls' gives the class id
+        class_name = horn_model.names[class_id]
+    return class_name
 
 
 def predict_wound_status(side_img_path):
@@ -100,6 +107,7 @@ def predict_udder_type(side_img_path):
         class_name = udder_model.names[class_id]  # Get class name from the model's names dictionary
 
     return class_name
+    # return "Compact"
 
 
 #
@@ -133,7 +141,7 @@ if side_image_uploaded is not None and rear_image_uploaded is not None:
     predicted_weight = predict_weight(side_img_path, rear_img_path)
     predicted_bcs = predict_bcs(side_img_path)
     predicted_breed = predict_breed(side_img_path)
-    predicted_horn_status = predict_horn_status(side_img_path, rear_img_path)
+    predicted_horn_status = predict_horn_status(side_img_path)
     predicted_wound = predict_wound_status(side_img_path)
     predicted_wormload = predict_wormload(side_img_path)
     predicted_cleft = predict_cleft(side_img_path)
