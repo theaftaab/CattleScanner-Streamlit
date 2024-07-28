@@ -38,10 +38,10 @@ rear_image_uploaded = st.file_uploader("Upload Rear Image (jpg, jpeg, png)")
 
 
 def predict_bcs(side_img_path: str):
-    bcs_model = YOLO("CattleScanner/bcs.pt")
-    bcs_classes = ['BCS-1', 'BCS-1.25', 'BCS-1.5', 'BCS-1.75', 'BCS-2', 'BCS-2.25', 'BCS-2.5', 'BCS-2.75', 'BCS-3.0',
-                   'BCS-3.25', 'BCS-3.5', 'BCS-3.75', 'BCS-4.0',
-                   'BCS-4.25', 'BCS-4.5', 'BCS-4.75', 'BCS-5']
+    # bcs_model = YOLO("CattleScanner/bcs.pt")
+    # bcs_classes = ['BCS-1', 'BCS-1.25', 'BCS-1.5', 'BCS-1.75', 'BCS-2', 'BCS-2.25', 'BCS-2.5', 'BCS-2.75', 'BCS-3.0',
+    #                'BCS-3.25', 'BCS-3.5', 'BCS-3.75', 'BCS-4.0',
+    #                'BCS-4.25', 'BCS-4.5', 'BCS-4.75', 'BCS-5']
     # results = bcs_model(side_img_path)
     # class_id = int(results[0].boxes.cls.cpu())
     # return bcs_classes[class_id]
