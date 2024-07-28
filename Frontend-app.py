@@ -1,4 +1,5 @@
 import os
+from ultralytics import YOLO
 
 import streamlit as st
 
@@ -36,12 +37,26 @@ side_image_uploaded = st.file_uploader("Upload Side Image (jpg, jpeg, png)")
 rear_image_uploaded = st.file_uploader("Upload Rear Image (jpg, jpeg, png)")
 
 
-def predict_bcs(side_img_path):
-    return "BCS 2.25"
+def predict_bcs(side_img_path: str):
+    bcs_model = YOLO("CattleScanner/bcs.pt")
+    bcs_classes = ['BCS-1', 'BCS-1.25', 'BCS-1.5', 'BCS-1.75', 'BCS-2', 'BCS-2.25', 'BCS-2.5', 'BCS-2.75', 'BCS-3.0',
+                   'BCS-3.25', 'BCS-3.5', 'BCS-3.75', 'BCS-4.0',
+                   'BCS-4.25', 'BCS-4.5', 'BCS-4.75', 'BCS-5']
+    # results = bcs_model(side_img_path)
+    # class_id = int(results[0].boxes.cls.cpu())
+    # return bcs_classes[class_id]
+    return "BCS-2.25"
 
 
 def predict_breed(side_img_path):
-    return "Cow-Sahiwal"
+    breed_model = YOLO("CattleScanner/breed.pt")
+    breed_classes = ["Buffalo-Bhadavari", "Buffalo-Murha", "Buffalo-ND", "Buffalo-Pandarapuri", "Buffalo-Surthi",
+                     "Cow-Amruthmahal", "Cow-Deoni", "Cow-Gir",
+                     "Cow-HF-Crossbreed", "Cow-Hallikar", "Cow-Jersey-Crossbreed", "Cow-Malanad-Gidda",
+                     "Cow-Non-Descript-Breed", "Cow-Red-Sindhi", "Cow-Sahiwal"]
+    results = breed_model(side_img_path)
+    class_id = int(results[0].boxes.cls.cpu())
+    return breed_classes[class_id]
 
 
 def predict_horn_status(side_img_path, rear_img_path):
@@ -74,6 +89,7 @@ def predict_teat_score(side_img_path):
 
 def predict_udder_type(side_img_path):
     return "Udder Compact"
+
 
 #
 # if side_image_uploaded is not None and rear_image_uploaded is not None:
