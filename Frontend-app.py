@@ -72,7 +72,9 @@ def predict_wound_status(side_img_path):
 
 
 def predict_wormload(side_img_path):
-    return "Pot Belly Present"
+    worm_model = YOLO("CattleScanner/worm.pt")
+    results = worm_model(side_img_path)
+    return getClassName(results)
 
 
 def predict_cleft(side_img_path):
@@ -87,7 +89,9 @@ def predict_breed_grade(side_img_path):
 
 
 def predict_skin_coat(side_img_path):
-    return "Rough Skin coat"
+    coat_model = YOLO("CattleScanner/coat.pt")
+    results = coat_model(side_img_path)
+    return getClassName(results)
 
 
 def predict_teat_score(side_img_path):
