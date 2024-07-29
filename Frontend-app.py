@@ -36,12 +36,15 @@ st.title("Cattle Scanner")
 side_image_uploaded = st.file_uploader("Upload Side Image (jpg, jpeg, png)")
 rear_image_uploaded = st.file_uploader("Upload Rear Image (jpg, jpeg, png)")
 
+
 def getClassName(model):
     class_name = None
     for box in model[0].boxes:
         class_id = int(box.cls)  # Assuming 'cls' gives the class id
         class_name = model[0].names[class_id]  # Get class name from the model's names dictionary
     return class_name
+
+
 def predict_bcs(side_img_path: str):
     bcs_model = YOLO("CattleScanner/bcs.pt")
 
@@ -77,7 +80,10 @@ def predict_cleft(side_img_path):
 
 
 def predict_breed_grade(side_img_path):
-    return "Grade A"
+    grade_model = YOLO("CattleScanner/grade.pt")
+
+    results = grade_model(side_img_path)
+    return getClassName(results)
 
 
 def predict_skin_coat(side_img_path):
