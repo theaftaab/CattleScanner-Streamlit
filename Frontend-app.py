@@ -36,17 +36,17 @@ st.title("Cattle Scanner")
 side_image_uploaded = st.file_uploader("Upload Side Image (jpg, jpeg, png)")
 rear_image_uploaded = st.file_uploader("Upload Rear Image (jpg, jpeg, png)")
 
-
+def getClassName(model):
+    class_name = None
+    for box in model[0].boxes:
+        class_id = int(box.cls)  # Assuming 'cls' gives the class id
+        class_name = model[0].names[class_id]  # Get class name from the model's names dictionary
+    return class_name
 def predict_bcs(side_img_path: str):
     bcs_model = YOLO("CattleScanner/bcs.pt")
 
     results = bcs_model(side_img_path)
-    class_name = None
-    for box in results[0].boxes:
-        class_id = int(box.cls)  # Assuming 'cls' gives the class id
-        class_name = bcs_model.names[class_id]  # Get class name from the model's names dictionary
-
-    return class_name
+    return getClassName(results)
     # return "BCS-2.25"
 
 
@@ -54,23 +54,14 @@ def predict_breed(side_img_path):
     breed_model = YOLO("CattleScanner/breed.pt")
 
     results = breed_model(side_img_path)
-    class_name = None
-    for box in results[0].boxes:
-        class_id = int(box.cls)  # Assuming 'cls' gives the class id
-        class_name = breed_model.names[class_id]  # Get class name from the model's names dictionary
-
-    return class_name
+    return getClassName(results)
 
 
 def predict_horn_status(side_img_path):
     horn_model = YOLO("CattleScanner/horn.pt")
 
     results = horn_model(side_img_path)
-    class_name = None
-    for box in results[0].boxes:
-        class_id = int(box.cls)  # Assuming 'cls' gives the class id
-        class_name = horn_model.names[class_id]
-    return class_name
+    return getClassName(results)
 
 
 def predict_wound_status(side_img_path):
@@ -101,12 +92,7 @@ def predict_udder_type(side_img_path):
     udder_model = YOLO("CattleScanner/UdderType.pt")
 
     results = udder_model(side_img_path)
-    class_name = None
-    for box in results[0].boxes:
-        class_id = int(box.cls)  # Assuming 'cls' gives the class id
-        class_name = udder_model.names[class_id]  # Get class name from the model's names dictionary
-
-    return class_name
+    return getClassName(results)
     # return "Compact"
 
 
