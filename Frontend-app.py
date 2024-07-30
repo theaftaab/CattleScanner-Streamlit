@@ -77,9 +77,9 @@ def predict_wormload(side_img_path):
     return getClassName(results)
 
 
-def predict_cleft(side_img_path):
+def predict_cleft(rear_img_path):
     cleft_model = YOLO('CattleScanner/cleft.pt')
-    results = cleft_model(side_img_path)
+    results = cleft_model(rear_img_path)
     return getClassName(results)
 
 
@@ -144,7 +144,7 @@ if side_image_uploaded is not None and rear_image_uploaded is not None:
     predicted_horn_status = predict_horn_status(side_img_path)
     predicted_wound = predict_wound_status(side_img_path)
     predicted_wormload = predict_wormload(side_img_path)
-    predicted_cleft = predict_cleft(side_img_path)
+    predicted_cleft = predict_cleft(rear_img_path)
     predicted_breed_grade = predict_breed_grade(side_img_path)
     predicted_skin_coat = predict_skin_coat(side_img_path)
     predicted_teat_score = predict_teat_score(side_img_path)
