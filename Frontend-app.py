@@ -78,7 +78,9 @@ def predict_wormload(side_img_path):
 
 
 def predict_cleft(side_img_path):
-    return "Deeply Clefted Udder"
+    cleft_model = YOLO('CattleScanner/cleft.pt')
+    results = cleft_model(side_img_path)
+    return getClassName(results)
 
 
 def predict_breed_grade(side_img_path):
@@ -95,7 +97,9 @@ def predict_skin_coat(side_img_path):
 
 
 def predict_teat_score(side_img_path):
-    return "Teat Score - 5"
+    teat_model = YOLO("CattleScanner/teat.pt")
+    results = teat_model(side_img_path)
+    return getClassName(results)
 
 
 def predict_udder_type(side_img_path):
